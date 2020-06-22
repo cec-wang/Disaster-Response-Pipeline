@@ -15,7 +15,7 @@
 3. Go to http://0.0.0.0:3001/
 
 ### Note:
-1. generate and fetch the pickle file for the model in the same enviroment. Fetch a pickle file generated from a different environment might yield error. 
+1. generate and fetch the pickle file for the model in the same enviroment. Fetch a pickle file generated from a different environment might yield error. classifier.pkl included in the package can be used directly at Udacity workspace. But you need to generate new classifier.pkl if using Jupyter Notebook or any other environment.  
 
 2. The package has been successfully run at workspace. 
 
