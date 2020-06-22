@@ -62,7 +62,12 @@ def tokenize(text):
 
 def build_model():
     """
-    
+    Build a model pipeline
+    GridSearchCV for optimized parameters.
+    Parameters tried: 
+    n_estimators; mins_samples_split; ngram_range
+    two models were tried out:
+    Random Forest Classifier and Multi-nomial NB
     """
     # text processing and model pipeline
     pipeline = Pipeline([
@@ -93,6 +98,15 @@ def build_model():
     return cv     
 
 def evaluate_model(model, X_test, Y_test, category_names):
+    '''
+    evaluate the model
+    input:
+    model: sciket learn model
+    X_test, Y_test: arrays used for test
+    category_name: list of categories
+    output: 
+    print out the f1_score, precision, recall and report for each category
+    '''
     Y_pred = model.predict(X_test)
     # display results
     for i, col in enumerate(Y_test):
@@ -101,10 +115,16 @@ def evaluate_model(model, X_test, Y_test, category_names):
     
 
 def save_model(model, model_filepath):
+    '''
+    function saves the model into a pickle file
+    '''
     pickle.dump(model,open(model_filepath,'wb'))
 
 
 def main():
+    '''
+    Run the machine learning pipeline
+    '''
     if len(sys.argv) == 3:
         database_filepath, model_filepath = sys.argv[1:]
         print('Loading data...\n    DATABASE: {}'.format(database_filepath))
