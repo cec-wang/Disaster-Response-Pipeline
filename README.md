@@ -1,5 +1,7 @@
 # Disaster Response Pipeline Project
 ## Created by Zixing (Cecile) Wang as part of fulfillment for Udacity Data Science Nanodegree
+### Purpose:
+The purpose of this project is to automatically categorize a string of text based on the words used. 
 
 ### Instructions:
 1. Run the following commands in the project's root directory to set up your database and model.
