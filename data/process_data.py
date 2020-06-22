@@ -67,11 +67,22 @@ def clean_data(df):
     return df2
 
 def save_data(df, database_filename):
+    '''
+    saves the data in SQL using SQLite
+    input: 
+    df: DataFrame
+    database_filname: string indicating the path to the database
+    output:
+    df stored in a SQL called 'Messages' in the database
+    '''
     engine = create_engine(f'sqlite:///{database_filename}')
     df.to_sql('Messages', engine, index=False)
 
 
 def main():
+    '''
+    Run the ETL pipeline
+    '''
     if len(sys.argv) == 4:
 
         messages_filepath, categories_filepath, database_filepath = sys.argv[1:]
