@@ -29,7 +29,7 @@ def clean_data(df):
     function clean_data
     split categories into separate category columns
     Convert category values to just numbers 0 or 1
-    Replace categories column in df with new category columns
+    categories column in df with new category columns
     Remove duplicates
     input: a concanated DataFrame 
     output: cleaned DataFrame
@@ -49,7 +49,7 @@ def clean_data(df):
     for column in categories:
         # set each value to be the last character of the string
         categories[column] = categories[column].transform(lambda x: x[-1:])
-    
+        categories[column].replace ('2', '1', inplace = True)
          # convert column from string to numeric
         categories[column] = pd.to_numeric(categories[column])
     
@@ -67,22 +67,11 @@ def clean_data(df):
     return df2
 
 def save_data(df, database_filename):
-    '''
-    saves the data in SQL using SQLite
-    input: 
-    df: DataFrame
-    database_filname: string indicating the path to the database
-    output:
-    df stored in a SQL called 'Messages' in the database
-    '''
     engine = create_engine(f'sqlite:///{database_filename}')
     df.to_sql('Messages', engine, index=False)
 
 
 def main():
-    '''
-    Run the ETL pipeline
-    '''
     if len(sys.argv) == 4:
 
         messages_filepath, categories_filepath, database_filepath = sys.argv[1:]
