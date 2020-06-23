@@ -32,10 +32,12 @@ The purpose of this project is to automatically categorize a string of text base
 * Flask
 * sklearn
 * SQalchemy
+
 *process_data.py*
 * sys
 * pandas
 * SQAlchemy
+
 *train_classifier*
 * sys
 * pandas
