@@ -22,3 +22,40 @@ The purpose of this project is to automatically categorize a string of text base
 2. The package has been successfully run at workspace. 
 
 3. Last modification date: Jun 22, 2020
+
+### Libraires Used
+*run.py* 
+* json
+* plotly
+* pandas
+* nltk
+* Flask
+* sklearn
+* SQalchemy
+*process_data.py*
+* sys
+* pandas
+* SQAlchemy
+*train_classifier*
+* sys
+* pandas
+* SQAlchemy
+* nltk
+* sklearn
+* pickle
+
+### Package Composition
+1. Folder *app*
+    * Folder *templates*  
+        * *go. html*: html template for the webpage with the category output
+        * *aster.html*: html template for the main webpage
+    * *run.py* : python file that shows the webpage with graphs and prediction
+2. Folder *data*
+    * *disaster_categories.csv*: message categories raw data
+    * *disaster_messages.csv*: messages raw data
+    * *DisasterResponse.db*: database generated from process_data.py
+    * *process_data.py*: python pipline for data cleaning
+3. Folder *models*
+    * *train_classifier.py*: python pipeline for model training
+    * *classifier.pkl*: model pickle file generated from train_classifier.py which can be run with run.py. However, this package is not the lastest. Stronly encourage you to generate your own pickle file. 
+4. README.md
