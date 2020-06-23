@@ -1,6 +1,6 @@
 import sys
 import nltk
-nltk.download(['punkt', 'wordnet'])
+nltk.download(['punkt', 'wordnet', 'stopwords'])
 
 # import libraries
 from sqlalchemy import create_engine
@@ -11,6 +11,7 @@ import pandas as pd
 
 from nltk.tokenize import word_tokenize
 from nltk.stem import WordNetLemmatizer
+from nltk.corpus import stopwords
 
 from sklearn.datasets import make_multilabel_classification
 from sklearn.multioutput import MultiOutputClassifier
@@ -51,6 +52,8 @@ def tokenize(text):
     """
     tokens = word_tokenize(text)
     lemmatizer = WordNetLemmatizer()
+    # take away the stopwords
+    tokens = [w for w in tokens if w not in stopwords.words("english")]
     
     clean_tokens = []
     for tok in tokens:
@@ -62,12 +65,7 @@ def tokenize(text):
 
 def build_model():
     """
-    Build a model pipeline
-    GridSearchCV for optimized parameters.
-    Parameters tried: 
-    n_estimators; mins_samples_split; ngram_range
-    two models were tried out:
-    Random Forest Classifier and Multi-nomial NB
+    
     """
     # text processing and model pipeline
     pipeline = Pipeline([
@@ -98,33 +96,17 @@ def build_model():
     return cv     
 
 def evaluate_model(model, X_test, Y_test, category_names):
-    '''
-    evaluate the model
-    input:
-    model: sciket learn model
-    X_test, Y_test: arrays used for test
-    category_name: list of categories
-    output: 
-    print out the f1_score, precision, recall and report for each category
-    '''
     Y_pred = model.predict(X_test)
     # display results
-    for i, col in enumerate(Y_test):
-        print(f'{col} category:', classification_report(np.hstack(np.array(Y_test[col])),np.hstack(Y_pred[:,i])))
+    print(classification_report(np.hstack(np.array(Y_test)),np.hstack(Y_pred)))
     
     
 
 def save_model(model, model_filepath):
-    '''
-    function saves the model into a pickle file
-    '''
     pickle.dump(model,open(model_filepath,'wb'))
 
 
 def main():
-    '''
-    Run the machine learning pipeline
-    '''
     if len(sys.argv) == 3:
         database_filepath, model_filepath = sys.argv[1:]
         print('Loading data...\n    DATABASE: {}'.format(database_filepath))
